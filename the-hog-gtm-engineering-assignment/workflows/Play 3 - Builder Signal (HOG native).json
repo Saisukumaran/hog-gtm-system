@@ -1,0 +1,585 @@
+{
+  "name": "Play 3 - Builder Signal (HOG native)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "b78f5a5a-9ad8-4d27-9b6d-251ab87bda64",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1",
+              "name": "postUrls",
+              "type": "array",
+              "value": "=[\"https://www.linkedin.com/posts/alex-vacca_if-i-were-starting-gtm-from-zero-today-id-activity-7470050340466348032-0Gt9\"]"
+            },
+            {
+              "id": "a2",
+              "name": "signalKeyword",
+              "type": "string",
+              "value": "Commented Framework"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "51e09379-ded8-4ae7-b9a7-4c205201ffca",
+      "name": "Set Posts + Signal",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://developer.thehog.ai/api/v1/platform/scrapers/linkedin/post-comments",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Access-Key",
+              "value": "Enter your key here"
+            },
+            {
+              "name": "X-Secret-Key",
+              "value": "Enter your key here"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {\n  \"postUrls\": $json.postUrls\n} }}",
+        "options": {}
+      },
+      "id": "d0c958fc-3206-4827-a357-d9258e3211a1",
+      "name": "Hog - Scrape Comments",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        400,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const out = [];\nconst src = $('Set Posts + Signal').first().json.postUrls[0];\nfor (const item of $input.all()) {\n  const comments = item.json.data || [];\n  for (const c of comments) {\n    if (c.actor) out.push({ json: { actor: c.actor, sourcePost: src } });\n    for (const r of (c.replies || [])) {\n      if (r.actor) out.push({ json: { actor: r.actor, sourcePost: src } });\n    }\n  }\n}\nreturn out;"
+      },
+      "id": "d311736f-6695-4de6-8f01-af0a890b4c92",
+      "name": "Flatten People",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        816,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "m1",
+              "name": "Name",
+              "type": "string",
+              "value": "={{ $json.actor.name || '' }}"
+            },
+            {
+              "id": "m2",
+              "name": "LinkedIn URL",
+              "type": "string",
+              "value": "={{ ($json.actor.linkedinUrl || '').trim() }}"
+            },
+            {
+              "id": "m3",
+              "name": "Company",
+              "type": "string",
+              "value": "=={{ $json.actor.currentPosition?.[0]?.companyName || '' }}"
+            },
+            {
+              "id": "m4",
+              "name": "Title",
+              "type": "string",
+              "value": "={{ $json.actor.position || $json.actor.headline || '' }}"
+            },
+            {
+              "id": "m5",
+              "name": "Signal",
+              "type": "string",
+              "value": "={{ $('Set Posts + Signal').first().json.signalKeyword }}"
+            },
+            {
+              "id": "m6",
+              "name": "Source Post",
+              "type": "string",
+              "value": "={{ $json.sourcePost }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6e6e9672-9dc0-40e5-9c0d-6d7234ff70e0",
+      "name": "Map Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1008,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "if-linkedin-not-empty",
+              "leftValue": "={{ $json['LinkedIn URL'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "37e01e7f-0c85-440b-bca4-5fe5f578f3a3",
+      "name": "IF LinkedIn URL Exists",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1216,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const seen = new Set();\nconst out = [];\n\nfor (const item of $input.all()) {\n  const url = (item.json['LinkedIn URL'] || '').trim().toLowerCase();\n  if (!url) continue;\n  if (seen.has(url)) continue;\n  seen.add(url);\n  out.push(item);\n}\n\nreturn out;"
+      },
+      "id": "c990577b-9cd0-4b5e-b130-b207976485d7",
+      "name": "Dedupe (within run)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1408,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "base": {
+          "__rl": true,
+          "value": "appDRIUIwdsXdJUj7",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblxnlexqfZ6HG0t8",
+          "mode": "list",
+          "cachedResultName": "Leads",
+          "cachedResultUrl": "https://airtable.com/appDRIUIwdsXdJUj7/tblxnlexqfZ6HG0t8"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Score": 0,
+            "LinkedIn URL": "={{ $json[\"LinkedIn URL\"] }}",
+            "Name": "={{ $json.Name }}",
+            "Company": "={{ $json.Company }}",
+            "Source Play": "Builders - Hog",
+            "Signals": "={{ $json.Signal.trim() }}",
+            "Source Post": "={{ $json[\"Source Post\"] }}",
+            "Title": "={{ $json.Title }}"
+          },
+          "matchingColumns": [
+            "LinkedIn URL"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "LinkedIn URL",
+              "displayName": "LinkedIn URL",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Company",
+              "displayName": "Company",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Source Play",
+              "displayName": "Source Play",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pain Miner",
+                  "value": "Pain Miner"
+                },
+                {
+                  "name": "Builders",
+                  "value": "Builders"
+                },
+                {
+                  "name": "Competitor Engagers",
+                  "value": "Competitor Engagers"
+                },
+                {
+                  "name": "Hiring",
+                  "value": "Hiring"
+                },
+                {
+                  "name": "Direct ICP",
+                  "value": "Direct ICP"
+                },
+                {
+                  "name": "Builders - Hog",
+                  "value": "Builders - Hog"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Signals",
+              "displayName": "Signals",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Clay Pain",
+                  "value": "Clay Pain"
+                },
+                {
+                  "name": "Apollo Pain",
+                  "value": "Apollo Pain"
+                },
+                {
+                  "name": "Commented GTM",
+                  "value": "Commented GTM"
+                },
+                {
+                  "name": "Follows Competitor",
+                  "value": "Follows Competitor"
+                },
+                {
+                  "name": "Hiring",
+                  "value": "Hiring"
+                },
+                {
+                  "name": "Direct ICP",
+                  "value": "Direct ICP"
+                },
+                {
+                  "name": "=",
+                  "value": "="
+                },
+                {
+                  "name": "Commented GTM",
+                  "value": "Commented GTM"
+                },
+                {
+                  "name": "Commented Framework",
+                  "value": "Commented Framework"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Score",
+              "displayName": "Score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tier",
+              "displayName": "Tier",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Tier 1",
+                  "value": "Tier 1"
+                },
+                {
+                  "name": "Tier 2",
+                  "value": "Tier 2"
+                },
+                {
+                  "name": "Tier 3",
+                  "value": "Tier 3"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Champion",
+              "displayName": "Champion",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Outreach Angle",
+              "displayName": "Outreach Angle",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Source Post",
+              "displayName": "Source Post",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "1c713d12-c39f-4f3b-8ec0-294f5e43624d",
+      "name": "Airtable - Search Existing Lead",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1632,
+        0
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "bDxMqCtiYhUtGC8k",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "for (const item of $input.all()) {\n  if (Array.isArray(item.json.data)) {\n    item.json.data = item.json.data.slice(0, 50);\n  }\n}\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        608,
+        0
+      ],
+      "id": "da668967-dc7b-4d2e-b6b9-13bb79a92489",
+      "name": "Limit to 50 Comments"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Posts + Signal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Posts + Signal": {
+      "main": [
+        [
+          {
+            "node": "Hog - Scrape Comments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hog - Scrape Comments": {
+      "main": [
+        [
+          {
+            "node": "Limit to 50 Comments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flatten People": {
+      "main": [
+        [
+          {
+            "node": "Map Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Map Fields": {
+      "main": [
+        [
+          {
+            "node": "IF LinkedIn URL Exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF LinkedIn URL Exists": {
+      "main": [
+        [
+          {
+            "node": "Dedupe (within run)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dedupe (within run)": {
+      "main": [
+        [
+          {
+            "node": "Airtable - Search Existing Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable - Search Existing Lead": {
+      "main": [
+        []
+      ]
+    },
+    "Limit to 50 Comments": {
+      "main": [
+        [
+          {
+            "node": "Flatten People",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "147dc06c-2956-4125-aaa0-5d1b7ac1a5b7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3d593191b3c777cea2556ef6f608611f3e38abd610b8bf5f99fd77087c30969f"
+  },
+  "nodeGroups": [],
+  "id": "6DqiFwGigYLMzun4",
+  "tags": []
+}

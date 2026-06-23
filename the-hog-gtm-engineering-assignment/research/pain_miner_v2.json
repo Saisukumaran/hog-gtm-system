@@ -1,0 +1,196 @@
+{
+  "people": [
+    {
+      "name": "Travis Ross",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/travisross4_zoominfo-starts-at-about-15k-a-year-and-activity-7401610634771161093-25Vh",
+      "pain_point": "ZoomInfo is a costly and outdated solution for data.",
+      "evidence": "ZoomInfo Data Rot: A Costly, Outdated Solution... expensive, our team can help you clean them up fast."
+    },
+    {
+      "name": "Will Cannon",
+      "role": "",
+      "company": "UpLead",
+      "linkedin_url": "https://www.linkedin.com/posts/will-cannon_i-stole-zoominfos-entire-business-model-activity-7429193078831382529-bowA",
+      "pain_point": "ZoomInfo charges users for outdated contacts and unused credits.",
+      "evidence": "Outdated contacts, and credits they never used."
+    },
+    {
+      "name": "Alex Milman-Blum",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/milman-blum_zoominfo-lost-70-of-its-value-in-recent-activity-7372259197213753344-onz9",
+      "pain_point": "ZoomInfo is too expensive and suffers from inconsistent data accuracy.",
+      "evidence": "ZoomInfo is too expensive. Data accuracy feels inconsistent. The platform is overloaded."
+    },
+    {
+      "name": "Sam Holding",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/samholding_i-cancelled-zoominfo-not-because-the-service-activity-7186625000009838592-FbEQ",
+      "pain_point": "ZoomInfo hides its pricing and makes it difficult for customers to cancel.",
+      "evidence": "Cancel - hide pricing - hope customers give up and just let it renew."
+    },
+    {
+      "name": "Joseph G.",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/joseph-g-5488685b_the-most-expensive-tool-in-your-tech-stack-activity-7432107325349597184-BYiz",
+      "pain_point": "Prospecting tools are expensive and provide outdated contacts that bounce.",
+      "evidence": "The most expensive tool in your tech stack... outdated contacts, and credits they never used."
+    },
+    {
+      "name": "Stephen Comstock",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/stephencomstock_is-apolloio-really-hopeless-growlexi-recently-activity-7271225956210503680-Rymy",
+      "pain_point": "Apollo's customer support is unresponsive and overly reliant on AI.",
+      "evidence": "Apollo's human support has taken a back seat to AI. I felt like I was communicating to a shadow down a long hallway."
+    },
+    {
+      "name": "M Firestone",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/mfirestone1_im-calling-out-the-support-team-at-apolloio-activity-7401949163686440961-Mrrg",
+      "pain_point": "Apollo's support team is unhelpful when dealing with technical campaign questions.",
+      "evidence": "I'm calling out the support team at Apollo.io — pay attention."
+    },
+    {
+      "name": "Eric Quanstrom",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/quanstrom_most-of-the-apollo-killed-our-deliverability-activity-7466243918972604416-S6r1",
+      "pain_point": "Apollo users experience deliverability issues and sending limits.",
+      "evidence": "Apollo killed our deliverability — mailbox warm-up, authentication, and sending limits are real constraints."
+    },
+    {
+      "name": "Rozana Petrovska",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/rozana-petrovska-66b1a8225_stop-using-apollo-the-wrong-way-for-your-activity-7289643352054984704-4HYI",
+      "pain_point": "Apollo's customer support gaslights users about their poor email deliverability.",
+      "evidence": "Apollo's customer support is still trying to convince me that their deliverability is better than everyone else. It's just gaslighting!"
+    },
+    {
+      "name": "Everett Berry",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/everettberry_clay-apollo-its-true-this-is-a-super-activity-7427748222854541312-jQ8U",
+      "pain_point": "Apollo's API limits prevent data enrichment at scale.",
+      "evidence": "API limits which prevented enrichment at scale using Apollo's data."
+    },
+    {
+      "name": "Asher Chua",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/asher-chua_clay-is-expensive-im-always-running-out-activity-7356603036359667712-Kh6N",
+      "pain_point": "Clay credits are too limited and the platform becomes very expensive quickly.",
+      "evidence": "The biggest complaint I hear from new users of Clay is the fact that Clay credits are really limited and it gets really expensive."
+    },
+    {
+      "name": "Diana Melchor",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/diana-melchor-b25a34220_stop-wasting-clay-credits-every-month-with-activity-7348872143897575424-2xJq",
+      "pain_point": "Users waste expensive Clay credits on simple actions that could be done with formulas.",
+      "evidence": "Stop wasting Clay credits every month."
+    },
+    {
+      "name": "James Hanzimanolis",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/james-hanzimanolis_clays-pricing-is-atrocious-in-1-week-activity-7369497854266003460-HT__",
+      "pain_point": "Clay's pricing is atrocious with ~24% wrong phone data.",
+      "evidence": "Clay's pricing is atrocious. In 1 week, I spent $800 on phone credits with ~24% being wrong."
+    },
+    {
+      "name": "Isaac Wood",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/isaac-wood1_how-to-use-claycom-with-0-credits-live-activity-7267627662997630976-V0rE",
+      "pain_point": "Certain Clay credits are very expensive and offer low leverage.",
+      "evidence": "Some credits are worth it while others are very expensive and lower leverage."
+    },
+    {
+      "name": "Jacob Tuwiner",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/jacob-tuwiner_a-prospect-just-told-me-using-clay-is-like-activity-7356739893877764096-wv9W",
+      "pain_point": "Clay's data is expensive and users easily misuse their credits.",
+      "evidence": "A prospect just told me using Clay is like... expensive data."
+    },
+    {
+      "name": "Jay Teoh",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/jayteoh_accountability-matters-integrity-matters-activity-7429345707964346369-3Bq5",
+      "pain_point": "Lusha provides inaccurate data and lacks accountability.",
+      "evidence": "Lusha Data Error: Inaccurate Data and Lack of Accountability."
+    },
+    {
+      "name": "Chris Middleton",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/chrismiddleton_lusha-ai-artificialintelligence-activity-7360960303708168192-vTrm",
+      "pain_point": "Lusha's AI-powered lead generation is flawed, invasive, and hard to cancel.",
+      "evidence": "Lusha claims to be a trusted B2B contact resource... hard to cancel."
+    },
+    {
+      "name": "Joshua Fryszer",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/joshuafryszer_i-went-through-580-reddit-comments-and-942-activity-7462185248991215617-R9Rb",
+      "pain_point": "ZoomInfo, Apollo, and Lusha suffer from stale data, sticky contracts, and high bounce rates.",
+      "evidence": "I went through 580 Reddit comments and 942 reviews — stale data and sticky contracts are the recurring complaint."
+    },
+    {
+      "name": "Mike Heller",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/mike-s-heller_there-was-a-time-when-clearbit-was-far-and-activity-7166490741643436032-0kAh",
+      "pain_point": "Clearbit is priced for larger customers and too expensive for startups.",
+      "evidence": "Clearbit, like most established data vendors, is now priced for larger customers and often too expensive for a startup."
+    },
+    {
+      "name": "Jason Rosenthal",
+      "role": "",
+      "company": "",
+      "linkedin_url": "https://www.linkedin.com/posts/jason-rosenthal-951a715_30-of-their-data-was-bad-and-theyre-activity-7391490939854426112-Jn31",
+      "pain_point": "ZoomInfo charges premium pricing despite 30% bad data and high bounce rates.",
+      "evidence": "30% of their data was bad and they're still paying ZoomInfo premium pricing."
+    },
+    {
+      "name": "Sunil Vali",
+      "role": "Co-Founder",
+      "company": "SalesNTech",
+      "linkedin_url": "https://in.linkedin.com/in/sunil-vali-74a5543",
+      "pain_point": "Prospecting tools like Apollo, ZoomInfo, and Clay only provide names without context or reasons to reach out.",
+      "evidence": "A list is not a lead. Apollo, ZoomInfo and Clay sell you names, not reasons."
+    },
+    {
+      "name": "Adam Robinson",
+      "role": "CEO",
+      "company": "RB2B / Retention.com",
+      "linkedin_url": "https://www.linkedin.com/in/retentionadam",
+      "pain_point": "Contact data providers are consistently too expensive and take advantage of startups.",
+      "evidence": "Every time we switch it STILL feels too expensive."
+    },
+    {
+      "name": "Mitchell Keller",
+      "role": "B2B Lead Gen & RevOps",
+      "company": "Stealth Offers",
+      "linkedin_url": "https://ca.linkedin.com/in/mitchell-keller",
+      "pain_point": "High costs for stale funding signals.",
+      "evidence": "Stop paying hundreds a month for stale funding signals."
+    },
+    {
+      "name": "Gavin Zaentz",
+      "role": "Co-Founder and CEO",
+      "company": "Leadpoet",
+      "linkedin_url": "https://www.linkedin.com/in/gavin-zaentz",
+      "pain_point": "Stale data, wrong timing, wasting half the day qualifying leads.",
+      "evidence": "Stale data, wrong timing, and half the day spent qualifying leads before you could even think about reaching out."
+    }
+  ]
+}
